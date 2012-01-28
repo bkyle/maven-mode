@@ -1,11 +1,9 @@
-;;; -*-Emacs-Lisp-*-
+;;; maven-mode.el --- run maven from within emacs.
 ;;;
 ;;; Author: Bryan Kyle <bryan.kyle@gmail.com>
 ;;; Date: 2009-08-21
 ;;;
-;;; Maven Minor Mode - run maven from within emacs.
-;;;
-;;; Overview:
+;;; Commentary:
 ;;;
 ;;; maven-mode is a minor mode for that helps emacs work with maven.  maven-mode
 ;;; provides the following features:
@@ -32,7 +30,7 @@
 ;;; (2b) open the pom.xml by typing M-x find-pom-file <RET>
 ;;;
 
-
+;;; Code:
 
 (define-minor-mode maven-mode 
   "Toggle Maven mode.
