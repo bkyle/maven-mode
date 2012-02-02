@@ -1,11 +1,9 @@
-;;; -*-Emacs-Lisp-*-
+;;; maven-mode.el --- run maven from within emacs.
 ;;;
 ;;; Author: Bryan Kyle <bryan.kyle@gmail.com>
 ;;; Date: 2009-08-21
 ;;;
-;;; Maven Minor Mode - run maven from within emacs.
-;;;
-;;; Overview:
+;;; Commentary:
 ;;;
 ;;; maven-mode is a minor mode for that helps emacs work with maven.  maven-mode
 ;;; provides the following features:
@@ -22,19 +20,19 @@
 ;;;
 ;;;     (autoload 'maven-mode "maven-mode" nil t)
 ;;;
-;;; (1) open a file that is within a maven project and enable the mode 
+;;; (1) open a file that is within a maven project and enable the mode
 ;;;     by typing: M-x maven-mode <RET>.
 ;;;
-;;; (2a) compile, test, package, install your maven project by using the 
+;;; (2a) compile, test, package, install your maven project by using the
 ;;;      standard compile (M-x compile <RET> <RET>) and recompile (M-x recompile
 ;;;      <RET>) functions.
 ;;;
 ;;; (2b) open the pom.xml by typing M-x find-pom-file <RET>
 ;;;
 
+;;; Code:
 
-
-(define-minor-mode maven-mode 
+(define-minor-mode maven-mode
   "Toggle Maven mode.
 
 With no argument, this command toggles the mode.
@@ -46,7 +44,7 @@ by \"mvn\"."
 
   :init-value nil
   :lighter " Maven"
- 
+
   (if maven-mode
 	  (progn
 		(maven-mode-configure-variables)
@@ -63,13 +61,13 @@ by \"mvn\"."
 	(if pom
 		(setq compile-command (format "mvn -f %s compile" pom)))))
 
-	
+
 (defun maven-find-pom (path)
   "Finds the nearest pom to the given path."
 
   (when (not path)
 	(setq path buffer-file-name))
-  
+
   (unless (not path)
 	(let ((current-path (if (file-directory-p (file-name-as-directory path))
 							(file-name-as-directory path)
@@ -97,11 +95,10 @@ by \"mvn\"."
 		(expand-file-name (concat (file-name-as-directory current-path) "pom.xml")))
 	   (t
 		nil)))))
-  
+
 (defun find-pom-file ()
   "Finds the nearest pom to the current file."
   (interactive)
   (let ((pom (maven-find-pom buffer-file-name)))
 	(if pom (find-file pom)
 	  (error "Couldn't find pom.xml"))))
-
