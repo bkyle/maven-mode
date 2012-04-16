@@ -102,3 +102,5 @@ by \"mvn\"."
   (let ((pom (maven-find-pom buffer-file-name)))
 	(if pom (find-file pom)
 	  (error "Couldn't find pom.xml"))))
+
+(provide 'maven-mode)
